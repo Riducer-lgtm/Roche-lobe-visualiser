@@ -1,42 +1,49 @@
+#NumPy, matplot libraries
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
+#G is the gravitation constant for simplification its 1
 G=1
+#w is angular frequency, calculated by equating m*w**2*r=G*M*m/r**2
 w=0.5
+#Masses of particles
 M1=1
 M2=3
-
+#position and velocities
 x1=1
 y1=0
 
 x2=-1
 y2=0
-
+#test particle
 xp=0.4
 yp=0.7
 
 vxp=0
 vyp=0
 
+#starts at 
 t=0
+
+#used for data storage
 XP=[]
 YP=[]
 
+#adds till K where t<K
 dt=0.01
 
 while t<20:
-    
+    #distance between particles
     r=np.sqrt((x2-x1)**2+(y2-y1)**2)
+    #if particles collide the code stops
     if r<0.001:
         break
+    #distance from test particle from the particles
     rp1=np.sqrt((xp-x1)**2+(yp-y1)**2)
     rp2=np.sqrt((xp-x2)**2+(yp-y2)**2)
+    #i hope u understand 
     if rp1<0.001 or rp2<0.001:
         break
-    
-
-    ax2=(G*M1*(x1-x2))/r**3
-    ay2=(G*M1*(y1-y2))/r**3
 
     axp=-(G*M2*(xp-x1))/rp1**3-(G*M1*(xp-x2))/rp2**3+(2*w*vyp)+(w**2*xp)
     ayp=-(G*M2*(yp-y1))/rp1**3-(G*M1*(yp-y2))/rp2**3-(2*w*vxp)+(w**2*yp)
