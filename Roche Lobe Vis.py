@@ -36,6 +36,7 @@ while t<20:
         break
 
     
+
     axp=-(G*M1*(xp-x1))/rp1**3-(G*M2*(xp-x2))/rp2**3+(2*w*vyp)+(w**2*xp)
     ayp=-(G*M1*(yp-y1))/rp1**3-(G*M2*(yp-y2))/rp2**3-(2*w*vxp)+(w**2*yp)
 
@@ -53,8 +54,8 @@ while t<20:
         break
     
 
-    axp=-(G*M2*(xp-x1))/rp1**3-(G*M1*(xp-x2))/rp2**3+(2*w*vyp)+(w**2*xp)
-    ayp=-(G*M2*(yp-y1))/rp1**3-(G*M1*(yp-y2))/rp2**3-(2*w*vxp)+(w**2*yp)
+    axp=-(G*M1*(xp-x1))/rp1**3-(G*M2*(xp-x2))/rp2**3+(2*w*vyp)+(w**2*xp)
+    ayp=-(G*M1*(yp-y1))/rp1**3-(G*M2*(yp-y2))/rp2**3-(2*w*vxp)+(w**2*yp)
 
     vxp=vxp+0.5*axp*dt
     vyp=vyp+0.5*ayp*dt
@@ -66,6 +67,9 @@ while t<20:
     YP.append(yp)
 
 
+xcom=(M1*x1+M2*x2)/(M1+M2)
+ycom=(M1*y1+M2*y2)/(M1+M2)
+
 x=np.linspace(-5,5,1000)
 y=np.linspace(-5,5,1000)
 X,Y=np.meshgrid(x,y)
@@ -73,18 +77,18 @@ r1=np.sqrt((X-x1)**2+(Y-y1)**2+0.001)
 r2=np.sqrt((X-x2)**2+(Y-y2)**2+0.001)
 
 phi_g=-((G*M1)/r1)-((G*M2)/r2)
-phi_f=-0.5*w**2*(X**2 + Y**2)
+phi_f=-0.5*w**2*((X-xcom)**2 + (Y-ycom)**2)
+
 phi=phi_g+phi_f
 dphidy,dphidx=np.gradient(phi)
 gradphi=np.sqrt(dphidy**2+dphidx**2)
-
 mask1=gradphi<0.0005
 
 LX=X[mask1]
 LY=Y[mask1]
 
 for i in range(len(LX)):
-         if min(x1,x2)<LX[i]<max(x1,x2) and LY[i]<0.000001:
+         if min(x1,x2)<LX[i]<max(x1,x2) and np.abs(LY[i])<0.01:
              phi_l1=phi[mask1][i]
 
 
@@ -95,7 +99,7 @@ axes.set_ylim(-5,5)
 axes.scatter(x1,y1,color='r')
 axes.scatter(x2,y2,color='b')
 axes.contour(X,Y,phi,levels=500)
-axes.contour(X,Y,phi,levels=[phi_l1],color='red')
+axes.contour(X,Y,phi,levels=[phi_l1])
 plt.scatter(LX,LY,color='cyan')
 
 particle,=axes.plot([],[],'o',color='black')
