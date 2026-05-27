@@ -53,17 +53,34 @@ while t<20:
     ay2=(G*M1*(y1-y2))/r**3
 
 
-    vx1=vx1+ax1*dt
-    vy1=vy1+ay1*dt
+    vx1=vx1+0.5*ax1*dt
+    vy1=vy1+0.5*ay1*dt
 
-    vx2=vx2+ax2*dt
-    vy2=vy2+ay2*dt
+    vx2=vx2+0.5*ax2*dt
+    vy2=vy2+0.5*ay2*dt
 
     x1=x1+vx1*dt
     y1=y1+vy1*dt
 
     x2=x2+vx2*dt
     y2=y2+vy2*dt
+
+    r=np.sqrt((x2-x1)**2+(y2-y1)**2)
+    if r<0.001:
+        break
+    
+    ax1=(G*M2*(x2-x1))/r**3
+    ay1=(G*M2*(y2-y1))/r**3
+    
+
+    ax2=(G*M1*(x1-x2))/r**3
+    ay2=(G*M1*(y1-y2))/r**3
+
+    vx1=vx1+0.5*ax1*dt
+    vy1=vy1+0.5*ay1*dt
+
+    vx2=vx2+0.5*ax2*dt
+    vy2=vy2+0.5*ay2*dt
 
     t+=dt
 
@@ -105,7 +122,7 @@ def animate(i):
 
     cm.set_data([Xcm[i]],[Ycm[i]])
 
-    return planet1,planet2,trail2,trail1
+    return planet1,planet2,trail2,trail1,
 
 ani=FuncAnimation(fig,animate,frames=len(X1),interval=10)
 plt.grid(True)
