@@ -36,3 +36,5 @@ Parameters (masses, particle count, timestep, capture radius) are set at the top
 ## Author
 
 Har Ridam Singh, BS-MS, IISER Pune
+
+MAIL-'har.ridamsingh@students.iiserpune.ac.in'
