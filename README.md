@@ -23,7 +23,8 @@ A Python (NumPy + Matplotlib) simulation of mass transfer in a close binary star
 '''
 pip install numpy matplotlib
 python Mass_Transfer_Final.py
-```
+
+'''
 
 Parameters (masses, particle count, timestep, capture radius) are set at the top of each script.
 
