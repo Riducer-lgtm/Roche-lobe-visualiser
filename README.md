@@ -13,7 +13,8 @@ A Python (NumPy + Matplotlib) simulation of mass transfer in a close binary star
 - Jacobi constant drift as a numerical accuracy diagnostic
 
 ## Files
-| `Roche_Tolerance.py` | Single test particle in an equal-mass binary; Roche lobe found from the potential gradient |
+| `2_body_orbit` | Where I started from |
+| `Roche_Lobe_Vis.py` | Single test particle in an equal-mass binary; Roche lobe found from the potential gradient |
 | `Roche_Lobe_Optimized.py` | Roche potential, L1–L5 via bisection, leapfrog test particle with trail |
 | `mass_transfer_prototype.py` | Multi-particle leapfrog prototype of the gas stream |
 | `Mass_transfer.py` | Intermediate development version |
